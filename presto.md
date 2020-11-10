@@ -119,4 +119,20 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   hbase shell
   ```
 
-- 
+- [Hbase connector issues(https://github.com/prestodb/presto/issues/3992)
+
+- ```
+  issues:
+  java.lang.IllegalArgumentException: No factory for connector phoenix
+  	at com.google.common.base.Preconditions.checkArgument(Preconditions.java:216)
+  	at com.facebook.presto.connector.ConnectorManager.createConnection(ConnectorManager.java:208)
+  	at com.facebook.presto.metadata.StaticCatalogStore.loadCatalog(StaticCatalogStore.java:123)
+  	at com.facebook.presto.metadata.StaticCatalogStore.loadCatalog(StaticCatalogStore.java:98)
+  	at com.facebook.presto.metadata.StaticCatalogStore.loadCatalogs(StaticCatalogStore.java:80)
+  	at com.facebook.presto.metadata.StaticCatalogStore.loadCatalogs(StaticCatalogStore.java:68)
+  	at com.facebook.presto.server.PrestoServer.run(PrestoServer.java:135)
+  	at com.facebook.presto.server.PrestoServer.main(PrestoServer.java:77)
+  
+  ```
+
+- [GC1- 介绍](https://tech.meituan.com/2016/09/23/g1.html)

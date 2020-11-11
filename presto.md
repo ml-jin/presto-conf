@@ -171,4 +171,11 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   
   ```
 
+- 345 - version - for prestosql --- download complete;
+
+- ``` bash
+  # redis connected;
+  
+  ```
+
 - 

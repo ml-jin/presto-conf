@@ -150,3 +150,25 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   ```
 
 - [presto 和 prestodb 的对比](https://zhuanlan.zhihu.com/p/87621360)
+
+- [ES 的部署](https://www.cnblogs.com/aubin/p/8012840.html)
+
+- ![1605058331233](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605058331233.png)
+
+- ``` bash
+  curl -XPUT 'localhost:9200/twitter?pretty' -H 'Content-Type:application/json' -d'{
+  "settings":{
+  "index":{
+  "number_of_shards":3,
+  "number_of_replicas":2
+  }
+  }
+  '
+  
+  curl -XPUT '10.180.210.24:9200/twitter1?pretty' -H 'Content-Type:application/json' -d'{"settings":{"index" : {"number_of_shards" :3, "number_of_replicas" : 2}}'
+  # support es also; -- but not able to fettch data;
+  
+  
+  ```
+
+- 

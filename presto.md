@@ -79,8 +79,11 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   ./presto-cli --server 10.180.210.24:30085 --catalog hive-hadoop2  --schema default
   
   ./presto-cli --server 10.180.210.24:30085 --catalog hive  --schema default
+  
+./presto-cli --server 10.180.210.24:30085 --catalog jmx --schema current ## load  data to local
+  
   ```
-
+  
 - [Presto 介绍](https://blog.csdn.net/ycy0706/article/details/109520032)
 
 - ``` bash
@@ -123,6 +126,7 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
 
 - ```
   issues:
+  
   java.lang.IllegalArgumentException: No factory for connector phoenix
   	at com.google.common.base.Preconditions.checkArgument(Preconditions.java:216)
   	at com.facebook.presto.connector.ConnectorManager.createConnection(ConnectorManager.java:208)
@@ -133,6 +137,16 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   	at com.facebook.presto.server.PrestoServer.run(PrestoServer.java:135)
   	at com.facebook.presto.server.PrestoServer.main(PrestoServer.java:77)
   
+  
+  
   ```
 
 - [GC1- 介绍](https://tech.meituan.com/2016/09/23/g1.html)
+
+- [dd 命令介绍](http://c.biancheng.net/view/1146.html)
+
+- ``` bash
+  # jmx connetion test passed;
+  ```
+
+- [presto 和 prestodb 的对比](https://zhuanlan.zhihu.com/p/87621360)

@@ -195,4 +195,11 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   ./sqlline.py 10.180.210.24,10.180.210.228,10.180.210.36:2181
   ```
 
+- [zoo keeper status check](https://www.jianshu.com/p/3602921b5ee9)
+
+- ``` bash
+  # check zk status
+  ./zkServer.sh status 
+  ```
+
 - 

@@ -175,7 +175,19 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
 
 - ``` bash
   # redis connected;
+  CREATE TABLE 'mysql_to_redis' (
+    'id' int(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY ('id')
+  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  
+  # enter to redis server mode
+  redis-cli -c -h 10.180.210.24 -p 7001
+  hgetall # get all
+  dbsize # get the size
+  config get databases # get db info
   
   ```
+
+- [Hbase + phoenix use ](https://blog.csdn.net/sinadrew/article/details/79916723)
 
 - 

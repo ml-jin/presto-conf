@@ -190,4 +190,9 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
 
 - [Hbase + phoenix use ](https://blog.csdn.net/sinadrew/article/details/79916723)
 
+- ``` bash
+  # start the phoenix
+  ./sqlline.py 10.180.210.24,10.180.210.228,10.180.210.36:2181
+  ```
+
 - 

@@ -200,6 +200,11 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
 - ``` bash
   # check zk status
   ./zkServer.sh status 
+  ./zkCli.sh -server 10.180.210.24:2181  # check the port
   ```
 
+- [Hbase failed to connect with zk](https://blog.csdn.net/zjh_746140129/article/details/83417879)
+
+- [Hadoop, Hbase, Hive, Zookeepr default port](https://www.cnblogs.com/hankedang/p/5649414.html)
+- [presto  - inner mechaniseum & misc from meituan](https://tech.meituan.com/2014/06/16/presto.html)
 - 

@@ -47,7 +47,7 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   
 - ``` bash
   #
-   presto-mysql
+  presto-mysql
   <1>在 /etc/catalog/目录下创建mysql.properties, 在catalog下创建目录。
   
   connector.name=mysql
@@ -80,8 +80,10 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   
   ./presto-cli --server 10.180.210.24:30085 --catalog hive  --schema default
   
+  ```
+
 ./presto-cli --server 10.180.210.24:30085 --catalog jmx --schema current ## load  data to local
-  
+
   ```
   
 - [Presto 介绍](https://blog.csdn.net/ycy0706/article/details/109520032)
@@ -206,5 +208,146 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
 - [Hbase failed to connect with zk](https://blog.csdn.net/zjh_746140129/article/details/83417879)
 
 - [Hadoop, Hbase, Hive, Zookeepr default port](https://www.cnblogs.com/hankedang/p/5649414.html)
+
 - [presto  - inner mechaniseum & misc from meituan](https://tech.meituan.com/2014/06/16/presto.html)
-- 
+
+- [Presto db & presto sql compare](https://zhuanlan.zhihu.com/p/262236892)
+
+- [Presto sanity checks](https://blog.csdn.net/qq_41504585/article/details/108424931)
+
+- [Phoenix + Hbase](https://segmentfault.com/a/1190000011297889)
+
+- ``` xml
+  <property>
+      <name>hbase.table.sanity.checks</name>
+      <value>false</value>
+  </property>
+  <property>
+      <name>hbase.regionserver.wal.codec</name>		       <value>org.apache.hadoop.hbase.regionserver.wal.IndexedWALEditCodec</value>
+  </property>
+  <property>
+      <name>phoenix.schema.isNamespaceMappingEnabled</name>
+      <value>true</value>
+  </property>
+  <property>
+      <name>phoenix.schema.mapSystemTablesToNamespace</name>
+      <value>true</value>
+  </property>
+  <property>
+      <name>phoenix.coprocessor.maxServerCacheTimeToLiveMs</name>
+      <value>300000000</value>
+  </property>
+  <property>
+      <name>hbase.regionserver.executor.openregion.threads</name>
+      <value>100</value>
+  </property>
+  ```
+
+- ``` bash
+  # 
+  connector.name=redis
+  redis.nodes=localhost:6379
+  
+  redis.hide-internal-columns=false
+  redis.table-description-dir=/home/redis
+  redis.table-names=user_info
+  redis.default-schema=user_profile
+  redis.key-delimiter=:
+  redis.key-prefix-schema-table=true
+  redis.hide-internal-columns=false
+  
+  # get db info
+  info keyspace
+  get config databases
+  
+  # list all redis patterns
+  keys user* 
+  
+  # get user info
+  select * from redis.user_profile.user_info;
+  
+  
+  ```
+
+  
+
+  
+
+- ``` bash
+  # 
+  # prestosql-- ansi sql is diff from hive sql; -- HQL
+  
+  # change to double division;
+  SELECT CAST(5 AS DOUBLE) / 2
+  
+  #
+  {
+     "tableName": "cytest",
+  
+     "schemaName": "redis",
+  
+     "key": {
+         "dataFormat": "raw",
+  
+         "fields": [
+  
+              {
+                  "name":"redis_key",
+  
+                  "dataFormat":"_default",
+  
+                  "type":"VARCHAR",
+  
+                  "hidden":"false"
+  
+             }
+  
+         ]
+  
+     },
+  
+     "value": {
+         "dataFormat": "json",
+  
+         "fields": [
+  
+             {
+                  "name":"row_number",
+  
+                  "mapping":"rowNumber",
+  
+                  "type":"BIGINT"
+  
+             },
+  
+             {
+                  "name":"customer_key",
+  
+                  "mapping":"customerKey",
+  
+                  "type":"BIGINT"
+  
+             },
+  
+             {
+                  "name":"name",
+  
+                  "mapping":"name",
+  
+                  "type":"VARCHAR"
+  
+             }
+  
+        ]
+  
+      }
+  
+  }
+  
+  #
+  
+  set key2"{\"rowNumber\":3,\"customerKey\":3,\"name\":\"Customer#000000003\"}"https://prestosql.io/docs/current/develop/connectors.html
+  ```
+
+- [Connector customd ways](https://prestosql.io/docs/current/develop/connectors.html)
+

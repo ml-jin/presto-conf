@@ -407,4 +407,43 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   
   ```
 
+- 1. Functions and Operators;
+
+     ```
+     
+     ```
+
+     ##
+
+
+
+## Functions and Operations
+
+- ```mysql
+  SELECT CAST(null AS boolean) AND true; -- null
+  
+  SELECT CAST(null AS boolean) AND false; -- false
+  
+  SELECT CAST(null AS boolean) AND CAST(null AS boolean); -- null
+  ```
+
+- ``` mysql
+  # presto lang syntax;
+  Create a new schema web in the current catalog:
+  
+  CREATE SCHEMA web
+  Create a new schema sales in the hive catalog:
+  
+  CREATE SCHEMA hive.sales
+  Create the schema traffic if it does not already exist:
+  
+  CREATE SCHEMA IF NOT EXISTS traffic
+  Create a new schema web and set the owner to user alice:
+  
+  CREATE SCHEMA web AUTHORIZATION alice
+  Create a new schema web, set the LOCATION property to /hive/data/web and set the owner to user alice:
+  
+  CREATE SCHEMA web AUTHORIZATION alice WITH ( LOCATION = '/hive/data/web' )
+  ```
+
 - 

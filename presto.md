@@ -347,7 +347,64 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   #
   
   set key2"{\"rowNumber\":3,\"customerKey\":3,\"name\":\"Customer#000000003\"}"https://prestosql.io/docs/current/develop/connectors.html
+  
+  #  hive -- chmod -R 777 /warehouse ;
+  
   ```
 
 - [Connector customd ways](https://prestosql.io/docs/current/develop/connectors.html)
 
+- ``` bash
+  # kafka connector, check the topics
+  kafka-topics.sh --list --zookeeper localhost:2181 
+  
+  # get the topic total infor: 
+  ./kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list manager93.bigdata:6667 --topic topic-test1 --time -1
+  
+  # consumer cli
+  ./kafka-console-consumer.sh --bootstrap-server 10.180.210.93:6667 --topic topic-test1
+  
+  # producer cli
+  ./kafka-console-producer.sh --broker-list manager93.bigdata:6667,master94.bigdata:6667 -topic topic-test1 
+  # note
+  pay attention to the topic replica, should large than the replicas;
+  
+  # exam topic details
+  ./kafka-topics.sh --list --zookeeper localhost:2181
+  
+  #
+  
+  ```
+
+- [kafka connector tutorial](https://prestosql.io/docs/current/connector/kafka-tutorial.html)
+
+- ``` bash
+  # download the generated data
+  $ curl -o kafka-tpch https://repo1.maven.org/maven2/de/softwareforge/kafka_tpch_0811/1.0/kafka_tpch_0811-1.0.sh
+  $ chmod 755 kafka-tpch
+  
+  # kafka config 
+  
+  # test select query;
+  SELECT _message FROM customer LIMIT 5;
+  
+  # check the sum of account
+  SELECT sum(cast(json_extract_scalar(_message, '$.accountBalance') AS double)) FROM customer LIMIT 10;
+  ```
+
+- ![1605583719858](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605583719858.png)
+
+- ![1605583766897](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605583766897.png) the presto check cli
+- ![1605583853481](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605583853481.png)
+
+- ![1605592930530](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605592930530.png) show all the separated columns;
+
+- ``` bash
+  # set up the live twitter messages
+  $ curl -o twistr https://repo1.maven.org/maven2/de/softwareforge/twistr_kafka_0811/1.2/twistr_kafka_0811-1.2.sh
+  $ chmod 755 twistr
+  
+  
+  ```
+
+- 

@@ -446,4 +446,6 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   CREATE SCHEMA web AUTHORIZATION alice WITH ( LOCATION = '/hive/data/web' )
   ```
 
-- 
+- ![1605664884634](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605664884634.png) Alluxio's component
+
+- [Presto with alluxio](https://xie.infoq.cn/article/2dfcdffd66b91664c68c64701)

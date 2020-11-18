@@ -449,3 +449,103 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
 - ![1605664884634](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1605664884634.png) Alluxio's component
 
 - [Presto with alluxio](https://xie.infoq.cn/article/2dfcdffd66b91664c68c64701)
+
+- ``` bash
+  # show all the system nodes;
+  SELECT * FROM system.runtime.nodes;
+  ```
+
+- ``` bash
+  # windows add ssh port forwarding: check & get
+  Get-WindowsCapability -Online | ? Name -like 'OpenSSH.Client*'
+  Add-WindowsCapability -Online -Name OpenSSH.Client*
+  
+  # windows ssh tunnel forwarding to remote port way, 90 is the remote host, port 3389 is remote, 8888 is the local machine. also recommend use powershell to do the task;
+  ssh -L 8888:192.168.1.90:3389 root@192.168.1.90
+  ```
+
+- ``` bash
+  # suite 3 versions:
+  Linux-aarch64
+  Linux-ppc64le
+  Linux-x86_64
+  
+  #
+  ERROR: Presto requires Java 11+ (found 1.8.0_271)
+  ```
+
+- [JVM 堆内存分配](https://www.cnblogs.com/wang1001/p/9556444.html)
+
+- ``` bash
+  -- # hive operation
+  ALTER TABLE table_name RENAME TO new_table_name
+  
+  # change table name;
+  ALTER TABLE tgm_test RENAME TO tgm_test1;
+  # rename column, type -- support int and varchar
+  ALTER TABLE tgm_test1 RENAME column  name to name1;
+  # add column
+  ALTER TABLE tgm_test1 add column  namess1  varchar;
+  # drop column
+  ALTER TABLE tgm_test1 drop  column  namess;
+  
+  # from hive to mysql - left join
+  select * from hive.hivetest.tgm_test1 as tg left join mysql.test11.t1 as t2 on tg.id = t2.id where tg.id =1;
+  
+  
+  # Hive support file format
+  - ORC
+  
+  - Parquet
+  
+  - Avro
+  
+  - RCText (RCFile using ColumnarSerDe)
+  
+  - RCBinary (RCFile using LazyBinaryColumnarSerDe)
+  
+  - SequenceFile
+  
+  - JSON (using org.apache.hive.hcatalog.data.JsonSerDe)
+  
+  - CSV (using org.apache.hadoop.hive.serde2.OpenCSVSerde)
+  
+  TextFile
+  
+  # drop schema
+  DROP SCHEMA hive.web;
+  
+  ## mysql insert
+  insert into t1 (id) values (1);
+  insert t1 (1);
+  
+  ## cross origin data source join
+  use hivetest;
+  show tables;
+  # left join
+  select * from hive.hivetest.tgm_test1 as tg left join mysql.test11.t1 as t2 on tg.id = t2.id where tg.id =1;
+  
+  ## mysql need to be the cluster;
+  
+  #
+  通过 Presto 执行流程的架构，可以看出 Presto 在查询上也存在一些不足：
+  1.没有容错能力，当一个 query 分发到多个 Worker 去执行时，当有一个 Worker 因为各种原因查询失败，Master 感知到之后，整个 query 也会失败。
+  2.内存限制，由于 Presto 是纯内存计算，所以当内存不够时，Presto 并不会将结果 dump 到磁盘上，所以查询也就失败了。
+  3.并行查询，因为所有的 task 都是并行执行，如果其中一台 Worker 因为各种原因查询很慢，那么整个 query 就会变得很慢。
+  4.并发限制，因为全内存操作+内存限制，能同时处理的数据量有限，因而导致并发能力不足。
+  ```
+
+- ``` bash
+  # presto 查询流程：
+  查询流程如下：
+  
+  Client 使用 HTTP 协议发送一个 query 请求。
+  通过 Discovery Server 发现可用的 Server。
+  Coordinator 构建查询计划（通过 Anltr3 解析为 AST（抽象语法树），然后通过 Connector 获取原始数据的 Metadata 信息，生成分发计划和执行计划）。
+  Coordinator 向 Worker 发送任务。
+  Worker 通过 Connector 插件读取数据。
+  Worker 在内存里执行任务（Worker 是纯内存型计算引擎）。
+  Worker 将数据返回给 Coordinator，汇总之后再响应客户端。
+  ```
+
+- 

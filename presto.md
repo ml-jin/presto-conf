@@ -548,4 +548,116 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   Worker 将数据返回给 Coordinator，汇总之后再响应客户端。
   ```
 
-- 
+
+
+## Presto 源码阅读
+
+``` bash
+
+```
+
+[- antr generator plugin usage](https://www.jianshu.com/p/21f2afca65e8)
+
+   The way to generate the .g4 java files, also need to add import packages.
+
+- idea can choose specific module to build
+
+- [maven Enforcer  plugin](https://stackoverflow.com/questions/45337558/failed-to-execute-goal-org-apache-maven-pluginsmaven-enforcer-plugin)
+
+- mvn package -Dmaven.test.skip=true -Dcheckstyle.skip=true  , skip the test and checkstyle part;
+
+- ``` bash
+  # unzip
+  jar -xvf test.jar
+  
+  # zip
+   jar -cvf xxx.jar a.class b.class
+   # all zip
+   jar -cvf xx.jar *
+  ```
+
+- [Ambari_flink - integration](http://10.180.210.148:8080/zhangyao/ambari_flink)
+
+- ``` bash
+  # Ambari _ presto
+  
+  # define the installation location
+  chmod -R 777 /path/to/presto-server-345.tar.gz
+  mkdir -p /var/www/html/InsightHD/hdp/presto/
+  cp /path/to/presto.tar.gz /var/www/html/InsightHD/hdp/presto/
+  cp /path/to/jdk11 /usr/jdk64/
+  
+  # ambari - install
+  cp -r /presto/install/files /var/lib/ambari-server/resources/stacks/HDP/3.0/services/PRESTO 
+  ambari-server restart
+  
+  # how to distributed the worker nodes
+  
+  # how to use j2 templates
+  
+  # how to monitor the service -- application
+  
+  # how to activate the jdk 11 env
+  modify launcher , add java path to launcher
+  
+  # 
+  10.180.210.93/ljk3991!
+  
+  
+  
+  ```
+
+- ``` bash
+  # list all the shell env
+  chsh -l  
+  lha命令是从lharc演变而来的压缩程序，文件经它压缩后，会另外产生具有.lzh扩展名的压缩文件。
+  ```
+
+  * [Ambari basics](https://ambari.apache.org/1.2.1/installing-hadoop-using-ambari/content/ambari-chap1-1.html)
+
+*  [JVM OPT 介绍](https://www.jianshu.com/p/bb6b91f2fb29)
+
+* ``` absh
+  five steps:
+  
+  - install
+  - start
+  - stop
+  - status
+  - config
+  - main
+  
+  ## the deploy management scripts:
+  /usr/lib/ambari-server/lib/resource_management/libraries/functions
+  locale -a # list all locale
+  #
+  uuidgen # generate uuid
+  sed -i 's/node.id=mmmffffffff-ffff-ffff-ffff-ffffffffffff/node.id=$(uuidgen)/g' node.properties 
+  
+  #
+  
+  1.清理前内存使用情况 
+  free -m
+  
+  2.开始清理  
+  echo 1 > /proc/sys/vm/drop_caches
+  echo 3 > /proc/sys/vm/drop_caches
+  3.清理后内存使用情况 
+  free -m
+  
+  # su -hdfs
+  
+  hadoop 之hdfs数据块修复方法：
+  1、手动修复
+  hdfs fsck / #检查集群的健康状态
+  hdfs debug recoverLease -path 文件位置 -retries 重试次数 #修复指定的hdfs数据块。也就是关闭打开的文件。
+  
+  检查坏块：
+  hadoop fsck /user -files -blocks -locations
+  
+  检查是否有数据块正在写入：
+  hadoop fsck /user openforwrite
+  
+  ```
+
+* 

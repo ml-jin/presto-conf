@@ -660,4 +660,15 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   
   ```
 
-* 
+* [Hibench 使用](https://www.cnblogs.com/hellowcf/p/6912746.html)
+
+* ``` bash
+  ## implement the zip format;
+  
+  // 开启map端输出压缩
+  configuration.setBoolean("mapreduce.map.output.compress", true);
+  // 设置map端输出压缩方式
+  configuration.setClass("mapreduce.map.output.compress.codec", BZip2Codec.class, CompressionCodec.class);
+  ```
+
+* [Zip compress](https://blog.csdn.net/qq_40947493/article/details/104295757)

@@ -3,7 +3,7 @@
 - ```bash
   # worker
   coordinator=false
-  node-scheduler.include-coordinator=true
+  #node-scheduler.include-coordinator=true
   http-server.http.port=30085
   query.max-memory=5GB
   query.max-memory-per-node=1GB
@@ -36,15 +36,38 @@
   
   
   # ./presto1.jar --server 10.180.210.24:2181 --catalog hive --schema default
+  
   ```
+## official
+  # The following is a minimal configuration for the coordinator:
 
-- ``` bash
+  coordinator=true
+  node-scheduler.include-coordinator=false
+  http-server.http.port=8080
+  query.max-memory=50GB
+  query.max-memory-per-node=1GB
+  query.max-total-memory-per-node=2GB
+  discovery-server.enabled=true
+  discovery.uri=http://example.net:8080
+
+  # And this is a minimal configuration for the workers:
+
+  coordinator=false
+  http-server.http.port=8080
+  query.max-memory=50GB
+  query.max-memory-per-node=1GB
+  query.max-total-memory-per-node=2GB
+  discovery.uri=http://example.net:8080
+
+  ```
+  
+- bash
   # hdfs dfs -setrep -R 3 /  ## 设置文件复制级别。
   http-server.http.port=8001
 Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exist
   
   ```
-  
+
 - ``` bash
   #
   presto-mysql
@@ -87,6 +110,15 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   ```
   
 - [Presto 介绍](https://blog.csdn.net/ycy0706/article/details/109520032)
+
+二：
+先解释下各参数的含义：
+
+--server 是presto服务地址；
+--catalog 是默认使用哪个数据源，后面也可以切换，如果想连接mysql数据源，使用mysql数据源名称即可；
+--user 是用户名；
+--source 是代表查询来源，source设置格式为key=value形式（英文分号分割）； 例如个人从command line查询应设置为pf=adhoc;client=cli。
+
 
 - ``` bash
   CREATE TABLE IF NOT EXISTS tasks ( task_id INT  PRIMARY KEY, title VARCHAR(255) NOT NULL,start_date DATE,due_date DATE,status TINYINT NOT NULL,priority TINYINT NOT NULL,description TEXT) ;
@@ -672,3 +704,28 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   ```
 
 * [Zip compress](https://blog.csdn.net/qq_40947493/article/details/104295757)
+
+* ``` bash
+  # yarn.app.mapreduce.am.resource.mb
+  
+  echo -e "line1\r\nline2" >> .bashrc ## add new line carriage - return;
+  
+  ## call link - for templates usage. - The standard usage ways:
+   from metainfo.xml -> config/presto-conf.xml -> params.py -> config.properties.j2 -> realfolder/conf/presto-conf.properties. Then server call with config files.
+   
+   
+   # add the resourcemanagement path;
+   import sys
+   sys.path.insert(0, "/usr/lib/ambari-server/lib/")
+   from resource_management import *
+   # 
+   
+   # https://www.cnblogs.com/zhbzz2007/p/6158125.html - context lib 上下文管理器。
+  
+  ```
+
+- [Presto 集成Kerboros 环境下的Hive](https://cloud.tencent.com/developer/article/1158362)
+- core  -> resources ->system.py -- includes the Link etc functions.
+- [Python C3 MRO 集成](https://www.cnblogs.com/whatisfantasy/p/6046991.html)， use inspect MRO wisely.
+- [Presto 介绍](https://zhuanlan.zhihu.com/p/101366898)
+- 

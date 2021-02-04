@@ -64,7 +64,7 @@
 - bash
   # hdfs dfs -setrep -R 3 /  ## 设置文件复制级别。
   http-server.http.port=8001
-Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exist
+- Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exist
   
   ```
 
@@ -725,7 +725,59 @@ Query 20201109_073157_00003_iw9ex failed: line 1:1: Catalog 'hive' does not exis
   ```
 
 - [Presto 集成Kerboros 环境下的Hive](https://cloud.tencent.com/developer/article/1158362)
+
 - core  -> resources ->system.py -- includes the Link etc functions.
+
 - [Python C3 MRO 集成](https://www.cnblogs.com/whatisfantasy/p/6046991.html)， use inspect MRO wisely.
+
 - [Presto 介绍](https://zhuanlan.zhihu.com/p/101366898)
+
+- [Presto splilling properties](https://prestosql.io/docs/current/admin/properties-spilling.html) - 347, 防止内存使用过大，导致节点失败。
+
+- ``` bash
+  useradd -s /bin/bash tt111
+  ```
+
+- [Hadoop学习笔记 - Sort / TeraSort / TestDFSIO](https://blog.csdn.net/colorant/article/details/7852402)
+
+- [Presto 源码阅读： Overview](https://zhuanlan.zhihu.com/p/51393518)
+
+- ```bash
+   curl -I  -m  10  -o  /dev/null  -s  -w  %{http_code}   https://www.baidu.com ## 查询状态码。
+  ```
+
+- ``` 部署简单，基于内存分布式计算，无磁盘I/O。多数据源，是一个低延迟高并发的内存计算引擎，相比Hive，执行效率要高很多。使用Catalog、Schema和Table这3层结构来管理数据。
+  
+  ```
+
+- ![1608262139983](C:\Users\jinzhao01\AppData\Roaming\Typora\typora-user-images\1608262139983.png)
+
+- ``` bash
+  hadoop dfsadmin -safemode leave 
+  # leave the safemode cli
+  
+  # 创建presto用户。
+  ```
+
+- ``` bash
+  sync; echo 3 > /proc/sys/vm/drop_caches
+  
+  ulimit -n  # check 
+  ulimit –HSn 20480 # set the handler
+  
+  
+  #
+  
+  /etc/security/limits.conf:
+  
+  presto soft nofile 131072
+  presto hard nofile 131072
+  
+  
+  /usr/hdp/3.0.1.0-187/presto/presto-server-345/bin/launcher start --pid-file=/var/run/presto/coor/coor.id  --config='/var/lib/ambari-server/resources/stacks/HDP/3.0/services/PRESTO/configuration/config_new.properties'
+  
+  # config
+  Error injecting constructor, java.lang.IllegalArgumentException: Invalid memory configuration. The sum of max total query memory per node (161061273600) and heap headroom (5153960755) cannot be larger than the available heap memory (17179869184)
+  ```
+
 - 

@@ -220,6 +220,12 @@ vi slider-client.xml
 </configuration>
 ```
 
+zip 打包命令 - demo：
+
+``` bash 
+zip -q -r html.zip /home/html
+```
+
 presto 包安装
 
 ```
@@ -288,7 +294,7 @@ vi  slider-0.80.0-incubating/conf/resources.json
 
 ```bash
 #第一次执行忽略第一条命令，多次执行的时候需要删除hdfs上的缓存安装包
-hdfs dfs -rmr -skipTrash hdfs://hadoop1:8020/user/yarn/.slider/cluster/prestoserver
+hdfs dfs -rm -r -skipTrash hdfs://manager93.bigdata:8020/user/hdfs/.slider/cluster/prestoserver
 
 ./bin/slider create prestoserver --template conf/appConfig.json --resources conf/resources.json
 ```
